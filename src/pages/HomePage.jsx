@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { ShortenUrl } from '../services/ShortenUrl';
+import { useNavigate } from "react-router-dom";
+import { ShortenUrl } from '../services/urlService';
 
 
 function HomePage() {
   const [originalUrl, setOriginalUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setOriginalUrl(e.target.value);
@@ -17,12 +19,18 @@ function HomePage() {
     setShortenedUrl("");
 
     try {
-      const identifier= await ShortenUrl(originalUrl);
-      setShortenedUrl(identifier);
+      const response = await ShortenUrl(originalUrl);
+      console.log("response",response);
+      setShortenedUrl(response);
       setOriginalUrl('');
     } catch (error) {
       setErrorMessage(error.message);
     }
+  }
+
+  const handleShortenedUrlClick = (e) => {
+    e.preventDefault();
+    navigate(`/${shortenedUrl}`);
   }
   
   return (
@@ -51,7 +59,7 @@ function HomePage() {
       {shortenedUrl && (
         <div>
           <h2>Shortened URL:</h2>
-          <a href={shortenedUrl} target="_blank" rel="noopener noreferrer">
+          <a href="#" onClick={handleShortenedUrlClick}>
             {shortenedUrl}
           </a>
         </div>

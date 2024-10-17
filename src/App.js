@@ -2,6 +2,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import "./App.css";
 import ErrorPage from './pages/ErrorPage';
 import HomePage from "./pages/HomePage";
+import RedirectPage from "./pages/RedirectPage";
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" errorElement={<ErrorPage />}>
         <Route index element={<HomePage />} />
+        <Route path="/:shortenedUrl" element={<RedirectPage />} />
       </Route>
     )
   )
