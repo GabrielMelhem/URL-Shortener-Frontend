@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# URL Shortener Web Application 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple URL shortener web application built with **React.js** on the frontend, integrated with a URL shortening backend service. The application allows users to input a URL and generate a shortened Identifier, which can be used to redirect to the original URL. This project demonstrates frontend development with React, TailwindCSS for styling, and axios for HTTP requests.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Shorten URLs.
+- Display the shortened URL(Identifier).
+- Click on the shortened URL to be redirected.
+- Handles errors and shows appropriate error messages.
+- Clean UI with TailwindCSS styling 
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+├── public
+├── src
+│   ├── pages
+│   │   └── ErrorPage.jsx
+│   │   └── HomePage.jsx    
+│   │   └── RedirectPage.jsx        
+│   ├── services
+│   │   └── urlService.js       
+│   └── App.js                  
+├── README.md
+└── package.json
+```
+ - HomePage: The main page where users can input their URLs, and Displays the shortened URL once the request is successful
+ - RedirectPage: redirect to the original URL.
+ - urlService: Handles API requests using axios to interact with the backend URL shortening service.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies & Packages
 
-### `npm test`
+The following packages and technologies were used in the project:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - React: A JavaScript library for building user interfaces.
+ - TailwindCSS: A utility-first CSS framework for styling the application.
+ - axios: Promise-based HTTP client for making API requests.
 
-### `npm run build`
+## Installation & Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ # Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  - Make sure you have Node.js and npm installed.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ # Installed Packages
+  - React Router DOM: npm install react-router-dom
+  - axios: npm install axios
+  - Tailwind CSS: npm install -D tailwindcss postcss autoprefixer
+  - Tailwind Configuration: npx tailwindcss init -p
 
-### `npm run eject`
+  In tailwind.config.js, make sure to include the src folder paths:
+  ```
+    module.exports = {
+     content: [
+            "./src/**/*.{js,jsx,ts,tsx}",
+        ],
+     theme: {
+         extend: {},
+        },
+     plugins: [],
+    };
+  ```
+ In your main CSS file (src/index.css), add the following lines to include Tailwind
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Running the Application
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the React app locally, use the following command:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ `npm start`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This will start the development server, and the application will be accessible at http://localhost:3000 .
 
-## Learn More
+## Backend Integration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Ensure that the backend URL shortening service is up and running, as this React app interacts with the backend API to shorten URLs.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
 
-### Code Splitting
+ - Open the application at http://localhost:3000.
+ - Enter a URL into the input field.
+ - Click Shorten URL.
+ - The shortened URL will be displayed. Clicking on it will redirect you to the original URL.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Example Workflow
+ 1. **Step 1: Enter a URL into the input field**
 
-### Analyzing the Bundle Size
+ ![Enter URL](./public/screenshots/Enter%20url.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. **Step 2: Shorten URL by clicking the "Shorten URL" button**
+ 
+ ![Enter URL](./public/screenshots/Identifier.png)
 
-### Making a Progressive Web App
+3. **Step 3: Click on the shortened URL to be redirected to the original URL**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+ ![Enter URL](./public/screenshots/waiting.png)
 
-### Advanced Configuration
+ ![Enter URL](./public/screenshots/redirect.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Note
+TO make The browser should redirect you to the original URL while keeping the http://localhost:3000/shortenedUrl route in the address bar, so one of the Solutions is hosting the app on a platform like Netlify,create a proxy server that resolves the original URL and serves it, allowing you to maintain the same route in the address bar. 
