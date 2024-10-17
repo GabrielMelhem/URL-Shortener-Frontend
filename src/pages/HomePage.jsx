@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
+import { ShortenUrl } from '../services/ShortenUrl';
+
 
 function HomePage() {
   const [originalUrl, setOriginalUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
     setOriginalUrl(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting URL:", originalUrl)
+    setErrorMessage("");
+    setShortenedUrl("");
 
-    setOriginalUrl('');
+    try {
+      const identifier= await ShortenUrl(originalUrl);
+      setShortenedUrl(identifier);
+      setOriginalUrl('');
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   }
   
   return (
@@ -31,6 +41,12 @@ function HomePage() {
         <br />
         <button type="submit">Shorten URL</button>
       </form>
+
+      {errorMessage && (
+        <div>
+          <p>{errorMessage}</p>
+        </div>
+      )}
 
       {shortenedUrl && (
         <div>
